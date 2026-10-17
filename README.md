@@ -244,9 +244,19 @@ The idea: as LLMs become the kernel of an OS, they become a target. Karpathy sho
 ![Slide 35: jailbreak, safety training can be bypassed (Jailbroken paper)](images/slide-35.jpg)
 
 An assistant is trained to refuse harmful requests. A **jailbreak** is a prompt that gets around that. Three examples from the talk:
+<img width="1522" height="813" alt="image" src="https://github.com/user-attachments/assets/8bc57c34-1328-4ff5-9e65-bd99f0893b6e" />
 
 - **Role-play.** Ask the model to act as your late grandmother who used to read you dangerous recipes as bedtime stories. The role-play frame slips past the refusal.
 - **Encoding.** Write the request in Base64. Safety training was mostly in plain English, so the model understands the encoded text but the refusal does not trigger (from the *Jailbroken* paper: safety training fails by mismatched generalization).
+<img width="1205" height="830" alt="image" src="https://github.com/user-attachments/assets/642c3f59-ed2f-49ff-a3e9-2b989b24f5b0" />
+
+<img width="1507" height="976" alt="image" src="https://github.com/user-attachments/assets/18a55547-aa6e-4976-a1d8-5d34135e66d8" />
+
+A PANADA IS ASKING EXAMPLE 
+<img width="1359" height="940" alt="image" src="https://github.com/user-attachments/assets/58167afb-f600-49ec-80a7-4cced71a299b" />
+
+
+
 - **Universal transferable suffix.** Researchers optimized a string of odd-looking tokens that, appended to a harmful prompt, breaks the model; one suffix worked across prompts and even across different models. Images work too: carefully added noise on a picture of a panda can jailbreak a vision model.
 
 ![Slide 37: a universal transferable suffix jailbreak](images/slide-37.jpg)
