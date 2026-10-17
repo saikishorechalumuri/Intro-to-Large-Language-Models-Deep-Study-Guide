@@ -37,6 +37,42 @@ With these two files on a MacBook, no internet is needed. You type text; it prod
 | Cost | about $2 million |
 | Compute | about 1e24 floating-point operations |
 | Result | 140 GB parameters (about 70x smaller than the data) |
+Think of it as a giant pile of homework.
+
+**What a neural network really does**
+
+Training Llama 2 70B means doing one simple thing over and over: multiply two numbers, add the result to something, repeat. A floating-point operation (FLOP) is one such step with decimal numbers, like 3.7 × 2.1. The network does this trillions of times per word it reads, and it reads trillions of words.
+
+**Why GPUs**
+
+- A CPU (your laptop's main chip) is a few very smart workers. Each can do complicated jobs, but only a few at a time.
+- A GPU is a stadium with thousands of average students. Each one can only multiply and add, but they all work at the same moment.
+
+Training is millions of identical multiplications that don't depend on each other. That is exactly the job a stadium of students does best. GPUs were first made for video games, which also need millions of simple calculations per frame, and that is why they suit AI. The ones used for Llama-class training are chips like NVIDIA's A100 and H100. Google uses its own similar chips called TPUs.
+
+**What 1e24 means**
+
+1e24 is 1 followed by 24 zeros. One correction: the slide writes "FLOPS", but 1e24 is the *total number of operations* for the whole training, not a speed. The unit for speed is "FLOPs per second".
+
+Imagine every person on Earth, about 8 billion, doing one multiplication every second, non-stop. It would take about 4 million years to reach 1e24. Llama 2 did it in 12 days.
+
+**Checking the slide's numbers**
+
+- 6,000 GPUs × 12 days = about 6.2 billion GPU-seconds.
+- 1e24 ÷ 6.2 billion = about 160 trillion operations per second for each GPU. That is realistic for an A100, which peaks at about 312 trillion per second.
+- 6,000 GPUs × 12 days × 24 hours is about 1.7 million GPU-hours. At roughly $1 an hour each, that gives the $2 million on the slide.
+
+**Why you need thousands of them**
+
+- **Memory.** The 140 GB of parameters doesn't fit on one GPU (an A100 has up to 80 GB). Training also needs extra memory for working numbers, so the model is split across many GPUs.
+- **Speed.** One GPU would take about 200 years instead of 12 days, so thousands of GPUs split the work.
+- **Teamwork.** The GPUs share results through very fast cables and switches. Much of the engineering is keeping those thousands of GPUs from waiting on each other.
+
+**Today**
+
+Frontier labs reportedly use tens of thousands of GPUs or more, in data centers that use as much electricity as a small town. I'm going from general knowledge here, because labs rarely publish exact numbers.
+
+If you'd like, I can add this as a "hardware" box in section 2 of the guide.
 
 The compression is *lossy*, like a blurry zip file. The model keeps the gist of the text, not every word. Today's best models use far more of everything; Llama 2 is a small, cheap example.
 
